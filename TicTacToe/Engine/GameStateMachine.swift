@@ -129,41 +129,41 @@ class ActiveGameState: GKState {
             self.stateMachine?.enter(EndGameState.self)
             waitingOnPlayer = false
         }
-//        else if self.scene!.gameBoard!.isPlayerTwoTurn() {
-//            /** Disable User Interaction for AI to play only **/
-//            self.scene?.isUserInteractionEnabled = false
-//            
-//            assert(scene != nil, "Scene must not be nil")
-//            assert(scene?.gameBoard != nil, "Gameboard must not be nil")
-//            
-//            DispatchQueue.global(qos: .default).async {
-//                self.scene!.ai.gameModel = self.scene!.gameBoard
-//                let move = self.scene!.ai.bestMoveForActivePlayer() as? Move
-//                
-//                assert(move != nil, "AI should be able to find a move")
-//                
-//                let strategistTime = CFAbsoluteTimeGetCurrent()
-//                let delta = CFAbsoluteTimeGetCurrent() - strategistTime
-//                let aiTimeCeiling: TimeInterval = 1.0
-//                
-//                let delay = min(aiTimeCeiling - delta, aiTimeCeiling)
-//                
-//                DispatchQueue.main.asyncAfter(deadline: .now() + delay ) {
-//                    guard let cellNode: SKSpriteNode = self.scene?.childNode(withName: self.scene!.gameBoard!.getElementAtBoardLocation(index: move!.cell).node) as? SKSpriteNode else{
-//                        return
-//                
-//                    }
-//                    let circle = SKSpriteNode(imageNamed: "O_symbol")
-//                    circle.size = CGSize(width: 75, height: 75)
-//                    cellNode.addChild(circle)
-//                    self.scene!.gameBoard!.addPlayerValueAtBoardLocation(index: move!.cell, value: .O)
-//                    self.scene!.gameBoard!.togglePlayer()
-//                    self.waitingOnPlayer = false
-//                    self.scene?.isUserInteractionEnabled = true
-//                }
-//                
-//            }
-//        }
+        else if self.scene!.gameBoard!.isPlayerTwoTurn() {
+            /** Disable User Interaction for AI to play only **/
+            self.scene?.isUserInteractionEnabled = false
+            
+            assert(scene != nil, "Scene must not be nil")
+            assert(scene?.gameBoard != nil, "Gameboard must not be nil")
+            
+            DispatchQueue.global(qos: .default).async {
+                self.scene!.ai.gameModel = self.scene!.gameBoard
+                let move = self.scene!.ai.bestMoveForActivePlayer() as? Move
+                
+                assert(move != nil, "AI should be able to find a move")
+                
+                let strategistTime = CFAbsoluteTimeGetCurrent()
+                let delta = CFAbsoluteTimeGetCurrent() - strategistTime
+                let aiTimeCeiling: TimeInterval = 1.0
+                
+                let delay = min(aiTimeCeiling - delta, aiTimeCeiling)
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + delay ) {
+                    guard let cellNode: SKSpriteNode = self.scene?.childNode(withName: self.scene!.gameBoard!.getElementAtBoardLocation(index: move!.cell).node) as? SKSpriteNode else{
+                        return
+                
+                    }
+                    let circle = SKSpriteNode(imageNamed: "O_symbol")
+                    circle.size = CGSize(width: 75, height: 75)
+                    cellNode.addChild(circle)
+                    self.scene!.gameBoard!.addPlayerValueAtBoardLocation(index: move!.cell, value: .O)
+                    self.scene!.gameBoard!.togglePlayer()
+                    self.waitingOnPlayer = false
+                    self.scene?.isUserInteractionEnabled = true
+                }
+                
+            }
+        }
         else{
             self.waitingOnPlayer = false
             self.scene?.isUserInteractionEnabled = true

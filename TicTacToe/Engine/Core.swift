@@ -194,7 +194,7 @@ class Board : NSObject, NSCopying, GKGameModel {
         return false
     }
     
-    func scoreForPlayer(player: GKGameModelPlayer) -> Int {
+    func score(for player: GKGameModelPlayer) -> Int {
         if isWinForPlayer(player: player){
             if isPlayerOne(player: player){
                 currentScoreForPlayerOne += 4
