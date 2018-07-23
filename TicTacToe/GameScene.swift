@@ -38,7 +38,7 @@ class GameScene: SKScene {
         gameBoard = Board(gameboard: board)
         /** Initialising AI Player **/
         ai = GKMinmaxStrategist()
-        ai.maxLookAheadDepth = 2
+        ai.maxLookAheadDepth = 9
         ai.randomSource = GKARC4RandomSource()
         
         let beginGameState = StartGameState(scene: self)
